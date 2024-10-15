@@ -2,6 +2,7 @@ package org.iesharia.mytabata
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.BoringLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -20,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.tooling.preview.Preview
 import org.iesharia.mytabata.ui.theme.MytabataTheme
+
+var counterState = Boolean = false
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,16 +52,21 @@ fun Counter(modifier: Modifier = Modifier) {
         )
 
         Button(onClick = {
-            object : CountDownTimer(99000, 1000) {
+            if (!counterState) {
+                object : CountDownTimer(99000, 1000) {
 
-                override fun onTick(millisUntilFinished: Long) {
-                    theCounter = (millisUntilFinished / 1000).toString()
-                }
+                    override fun onTick(millisUntilFinished: Long) {
+                        theCounter = (millisUntilFinished / 1000).toString()
+                    }
 
-                override fun onFinish() {
-                    theCounter = "99"
-                }
-            }.start()
+                    override fun onFinish() {
+                        counterState = true
+                    }
+                }.start()
+                counterState = true
+            } else {
+                myCounter.cancel()
+            }
         }) {
             Text(
                 text = "Pulsar"
