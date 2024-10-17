@@ -54,17 +54,24 @@ fun Counter(modifier: Modifier = Modifier) {
         Row {
             Button(
                 onClick = {
-                    println("<")
-                },) { }
+
+                },
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Text(text = "<")
+            }
             Text(
                 text = "00:00:00",
                 modifier = Modifier.padding(13.dp)
             )
-            Text(
-                text = ">",
-                modifier = Modifier.clickable {}
-                    .padding(13.dp)
-            )
+            Button(
+                onClick = {
+
+                },
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Text(text = ">")
+            }
         }
 
     }
