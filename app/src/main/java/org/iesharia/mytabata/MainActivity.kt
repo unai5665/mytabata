@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
     var theCounter by remember { mutableStateOf(0L) }
-    val miConterDown by remember{ mutableStateOf(CounterDown(99, { newvalue -> theCounter = newvalue}))}
+    val miCounterDown = remember{CounterDown(99) { newvalue -> theCounter = newvalue}}
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -87,10 +87,10 @@ fun Counter(modifier: Modifier = Modifier) {
 
         )
         Button(onClick = {
-            miConterDown.toggle()
+            miCounterDown.toggle()
         }) {
             Text(
-                text = "Pulsar"
+                text = "Iniciar"
             )
         }
     }
