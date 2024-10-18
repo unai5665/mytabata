@@ -50,6 +50,7 @@ fun Counter(modifier: Modifier = Modifier) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentWidth(Alignment.CenterHorizontally)
+            .padding(top = 400.dp)
     ){
         Row {
             Button(
@@ -62,7 +63,7 @@ fun Counter(modifier: Modifier = Modifier) {
             }
             Text(
                 text = "00:00:00",
-                modifier = Modifier.padding(13.dp)
+                modifier = Modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)
             )
             Button(
                 onClick = {
