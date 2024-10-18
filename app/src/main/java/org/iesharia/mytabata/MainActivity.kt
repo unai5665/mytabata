@@ -76,10 +76,15 @@ fun Counter(modifier: Modifier = Modifier) {
         }
 
     }
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentWidth(Alignment.CenterHorizontally)
+    ) {
         Text(
             text = theCounter.toString(),
-            modifier = modifier
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+
         )
         Button(onClick = {
             miConterDown.toggle()
