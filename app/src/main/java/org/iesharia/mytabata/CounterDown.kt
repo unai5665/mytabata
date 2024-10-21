@@ -49,4 +49,13 @@ class CounterDown(private var segundos: Int, private var loquehacealhacertick: (
             currentTimer?.cancel()
         }
     }
+
+    fun reset(newTimeInSeconds: Int) {
+        Log.i("dam2", "Resetting timer")
+        currentTimer?.cancel()
+        segundos = newTimeInSeconds
+        remainingTime = newTimeInSeconds * 1000L
+        counterState = false
+        loquehacealhacertick(newTimeInSeconds.toLong()) // Update UI
+    }
 }
