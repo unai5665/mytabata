@@ -44,37 +44,41 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
-    var theCounter by remember { mutableStateOf(0L) }
-    val miCounterDown = remember{CounterDown(99) { newvalue -> theCounter = newvalue}}
+    var theCounter by remember { mutableStateOf(99L) }
+    var formattedTime by remember { mutableStateOf(formatTime(theCounter)) } 
+    val miCounterDown = remember{CounterDown(99) { newvalue ->
+        theCounter = newvalue
+        formattedTime = formatTime(newvalue) 
+    }}
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentWidth(Alignment.CenterHorizontally)
             .padding(top = 400.dp)
-    ){
+    ) {
         Row {
             Button(
                 onClick = {
-
+                    
                 },
                 modifier = Modifier.padding(8.dp)
             ) {
                 Text(text = "<")
             }
             Text(
-                text = "00:00:00",
+                text = formattedTime, 
                 modifier = Modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)
             )
             Button(
                 onClick = {
-
+                    
                 },
                 modifier = Modifier.padding(8.dp)
             ) {
                 Text(text = ">")
             }
         }
-
     }
     Column(
         modifier = Modifier
@@ -82,18 +86,16 @@ fun Counter(modifier: Modifier = Modifier) {
             .wrapContentWidth(Alignment.CenterHorizontally)
     ) {
         Text(
-            text = theCounter.toString(),
+            text = formattedTime, 
             modifier = Modifier.align(Alignment.CenterHorizontally)
-
         )
         Button(onClick = {
-            miCounterDown.toggle()
+            miCounterDown.toggle() 
         }) {
-            Text(
-                text = "Iniciar"
-            )
+            Text(text = "Iniciar / Pausar")
         }
     }
 }
+
 
 
