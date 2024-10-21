@@ -44,8 +44,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
-    var theCounter by remember { mutableStateOf(99L) } // Tiempo inicial en segundos
-    var formattedTime by remember { mutableStateOf(formatTime(theCounter)) } // Tiempo formateado
+    var theCounter by remember { mutableStateOf(99L) } 
+    var formattedTime by remember { mutableStateOf(formatTime(theCounter)) } 
     val miCounterDown = remember {
         CounterDown(theCounter.toInt()) { newvalue ->
             theCounter = newvalue
@@ -98,13 +98,21 @@ fun Counter(modifier: Modifier = Modifier) {
             text = formattedTime, 
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
-        Button(onClick = {
-            miCounterDown.toggle() 
-        }) {
-            Text(text = "Iniciar / Pausar")
+        Row {
+            Button(onClick = {
+                miCounterDown.toggle() 
+            }) {
+                Text(text = "Iniciar / Pausar")
+            }
+            Button(onClick = {
+                miCounterDown.reset(99) 
+            }) {
+                Text(text = "Reiniciar")
+            }
         }
     }
 }
+
 
 fun formatTime(timeInSeconds: Long): String {
     val minutes = timeInSeconds / 60
