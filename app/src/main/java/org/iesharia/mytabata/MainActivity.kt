@@ -44,12 +44,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
-    var theCounter by remember { mutableStateOf(99L) }
-    var formattedTime by remember { mutableStateOf(formatTime(theCounter)) } 
-    val miCounterDown = remember{CounterDown(99) { newvalue ->
-        theCounter = newvalue
-        formattedTime = formatTime(newvalue) 
-    }}
+    var theCounter by remember { mutableStateOf(99L) } // Tiempo inicial en segundos
+    var formattedTime by remember { mutableStateOf(formatTime(theCounter)) } // Tiempo formateado
+    val miCounterDown = remember {
+        CounterDown(theCounter.toInt()) { newvalue ->
+            theCounter = newvalue
+            formattedTime = formatTime(newvalue)
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -60,7 +62,11 @@ fun Counter(modifier: Modifier = Modifier) {
         Row {
             Button(
                 onClick = {
-                    
+                    if (theCounter > 10) {
+                        theCounter -= 10 
+                        miCounterDown.reset(theCounter.toInt()) 
+                    }
+                    formattedTime = formatTime(theCounter)
                 },
                 modifier = Modifier.padding(8.dp)
             ) {
@@ -72,7 +78,9 @@ fun Counter(modifier: Modifier = Modifier) {
             )
             Button(
                 onClick = {
-                    
+                    theCounter += 10 
+                    miCounterDown.reset(theCounter.toInt()) 
+                    formattedTime = formatTime(theCounter)
                 },
                 modifier = Modifier.padding(8.dp)
             ) {
@@ -80,6 +88,7 @@ fun Counter(modifier: Modifier = Modifier) {
             }
         }
     }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -96,6 +105,7 @@ fun Counter(modifier: Modifier = Modifier) {
         }
     }
 }
+
 fun formatTime(timeInSeconds: Long): String {
     val minutes = timeInSeconds / 60
     val seconds = timeInSeconds % 60
