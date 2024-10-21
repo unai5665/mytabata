@@ -3,7 +3,7 @@ package org.iesharia.mytabata
 import android.os.CountDownTimer
 import android.util.Log
 
-class CounterDown(var segundos: Int, var loquehacealhacertick: (Long) -> Unit) {
+class CounterDown(private var segundos: Int, private var loquehacealhacertick: (Long) -> Unit) {
     private var counterState: Boolean = false
     private var currentTimer: CountDownTimer? = null
     private var remainingTime: Long = segundos * 1000L
@@ -37,7 +37,7 @@ class CounterDown(var segundos: Int, var loquehacealhacertick: (Long) -> Unit) {
         Log.i("dam2", "Starting timer")
         if (!counterState) {
             counterState = true
-            createTimer(remainingTime) // Recreate the timer with the remaining time
+            createTimer(remainingTime)
             currentTimer?.start()
         }
     }
@@ -46,7 +46,7 @@ class CounterDown(var segundos: Int, var loquehacealhacertick: (Long) -> Unit) {
         Log.i("dam2", "Pausing timer")
         if (counterState) {
             counterState = false
-            currentTimer?.cancel() // Stop the timer
+            currentTimer?.cancel()
         }
     }
 }
