@@ -56,6 +56,6 @@ class CounterDown(private var segundos: Int, private var loquehacealhacertick: (
         segundos = newTimeInSeconds
         remainingTime = newTimeInSeconds * 1000L
         counterState = false
-        loquehacealhacertick(newTimeInSeconds.toLong()) 
+        loquehacealhacertick(newTimeInSeconds.toLong())
     }
 }

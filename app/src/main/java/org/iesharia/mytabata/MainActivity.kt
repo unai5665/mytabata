@@ -44,8 +44,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
-    var theCounter by remember { mutableStateOf(99L) } 
-    var formattedTime by remember { mutableStateOf(formatTime(theCounter)) } 
+    var theCounter by remember { mutableStateOf(0L) }
+    var formattedTime by remember { mutableStateOf(formatTime(theCounter)) }
     val miCounterDown = remember {
         CounterDown(theCounter.toInt()) { newvalue ->
             theCounter = newvalue
@@ -63,8 +63,8 @@ fun Counter(modifier: Modifier = Modifier) {
             Button(
                 onClick = {
                     if (theCounter > 10) {
-                        theCounter -= 10 
-                        miCounterDown.reset(theCounter.toInt()) 
+                        theCounter -= 10
+                        miCounterDown.reset(theCounter.toInt())
                     }
                     formattedTime = formatTime(theCounter)
                 },
@@ -73,13 +73,13 @@ fun Counter(modifier: Modifier = Modifier) {
                 Text(text = "<")
             }
             Text(
-                text = formattedTime, 
+                text = formattedTime,
                 modifier = Modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)
             )
             Button(
                 onClick = {
-                    theCounter += 10 
-                    miCounterDown.reset(theCounter.toInt()) 
+                    theCounter += 10
+                    miCounterDown.reset(theCounter.toInt())
                     formattedTime = formatTime(theCounter)
                 },
                 modifier = Modifier.padding(8.dp)
@@ -95,17 +95,17 @@ fun Counter(modifier: Modifier = Modifier) {
             .wrapContentWidth(Alignment.CenterHorizontally)
     ) {
         Text(
-            text = formattedTime, 
+            text = formattedTime,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Row {
             Button(onClick = {
-                miCounterDown.toggle() 
+                miCounterDown.toggle()
             }) {
                 Text(text = "Iniciar / Pausar")
             }
             Button(onClick = {
-                miCounterDown.reset(99) 
+                miCounterDown.reset(0)
             }) {
                 Text(text = "Reiniciar")
             }
@@ -119,6 +119,3 @@ fun formatTime(timeInSeconds: Long): String {
     val seconds = timeInSeconds % 60
     return String.format("%02d:%02d", minutes, seconds)
 }
-
-
-
